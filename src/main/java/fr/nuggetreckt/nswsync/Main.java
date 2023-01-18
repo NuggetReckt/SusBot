@@ -1,5 +1,6 @@
 package fr.nuggetreckt.nswsync;
 
+import fr.nuggetreckt.nswsync.listeners.OnJoinListener;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -9,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class Main {
 
-    public Main instance;
+    public static Main instance;
 
     public JDA jda;
 
@@ -46,10 +47,10 @@ public class Main {
     }
 
     private void registerEvents() {
-
+        jda.addEventListener(new OnJoinListener());
     }
 
-    public Main getInstance() {
+    public static Main getInstance() {
         return instance;
     }
 
