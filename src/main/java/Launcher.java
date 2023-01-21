@@ -1,4 +1,4 @@
-import fr.nuggetreckt.nswsync.Main;
+import fr.nuggetreckt.susbot.Main;
 
 public class Launcher {
     public static void main(String[] args) {
