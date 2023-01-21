@@ -1,6 +1,7 @@
 package fr.nuggetreckt.susbot;
 
 import fr.nuggetreckt.susbot.listeners.OnJoinListener;
+import fr.nuggetreckt.susbot.listeners.OnReadyListener;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -13,7 +14,9 @@ public class Main {
     public static Main instance;
 
     public Dotenv dotenv;
-    public Logger logger = LoggerFactory.getLogger(Main.class);
+    public String version;
+
+    private final Logger logger = LoggerFactory.getLogger(Main.class);
 
     private JDA jda;
     private String token;
@@ -47,6 +50,7 @@ public class Main {
 
     private void registerEvents() {
         jda.addEventListener(new OnJoinListener());
+        jda.addEventListener(new OnReadyListener());
     }
 
     //return main instance
@@ -58,8 +62,17 @@ public class Main {
         return jda;
     }
 
+    public Logger getLogger() {
+        return logger;
+    }
+
     private String getToken() {
         return token;
+    }
+
+    public String getVersion() {
+        version = getInstance().getClass().getPackage().getImplementationVersion();
+        return version;
     }
 
     private void setToken(String token) {
